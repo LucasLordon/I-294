@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Mastery</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./assets/styles.css" />
-    <!-- Import Vue.js -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <div class="nav-bar"></div>
-      
-      <div class="product-display">
-        <div class="product-container">
-          <div class="product-image">
-            <!--v:bind: src=attribute to image=expression-->
-            <img :src="image">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Mastery</title>
+  <!-- Import Styles -->
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <!-- Import Vue.js -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="nav-bar"></div>
+
+    <div class="product-display">
+      <div class="product-container">
+        <div class="product-image">
+          <!--v:bind: src=attribute to image=expression-->
+          <img :src="image">
+        </div>
+        <div class="product-info">
+          <h1>{{ product }}</h1>
+          <p>Description : {{description}}</p>
+          <div v-if="onSale">
+            <p>On Sale</p>
+            <p v-if="inventory > 10 && inStock">In Stock</p>
+            <p v-else-if="inventory > 0 && inStock">Almost out of Stock only {{inventory}} remaining</p>
+            <p v-else="inStock">Out of Stock</p>
           </div>
-          <div class="product-info">
-            <h1>{{ product }}</h1>
-            <p>Description : {{description}}</p>
-            <div v-if="onSale">
-              <p>On Sale</p>
-              <p v-if="inventory > 10 && inStock">In Stock</p>
-              <p v-else-if="inventory > 0 && inStock">Almost out of Stock only {{inventory}} remaining</p>
-              <p v-else="inStock">Out of Stock</p>
-            </div>
-            <p v-else="onSale">Not in Sale</p>
+          <p v-else="onSale">Not in Sale</p>
+          <ul>
+            <li v-for="detail in details">{{detail}}</li>
+          </ul>
+          <div v-for="variant in variants" :key="variant.id">{{variant.color}}
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Import Js -->
-    <script src="./main.js"></script>
+  <!-- Import Js -->
+  <script src="./main.js"></script>
 
-    <!-- Mount App -->
-    <script>
-      const mountedApp = app.mount('#app')
-    </script>
-  </body>
+  <!-- Mount App -->
+  <script>
+    const mountedApp = app.mount('#app')
+  </script>
+</body>
+
 </html>
