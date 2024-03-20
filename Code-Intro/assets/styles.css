@@ -46,6 +46,10 @@ body {
   cursor: not-allowed;
 }
 
+.active{
+  border: 2px solid #ad3838;
+}
+
 h1 {
   font-size: 50px;
 }
